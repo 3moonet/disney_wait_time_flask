@@ -1,0 +1,38 @@
+{% extends 'admin.html' %}
+
+{% block title %}
+<title>Wait_time</title>
+{% endblock %}
+
+{% block content %}
+<h1>Wait Time list</h1>
+<form class="d-flex" action="/wait-time/search" method="POST">
+    <input class="form-control form-control-sm me-2" type="date" name="date" required value="{{date_time.strftime('%Y-%m-%d')}}">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+<table class="table table-sm table-striped table-bordered border-1 text-secondary table-light">
+    <tr>
+        <th>id</th>
+        <th>name_id</th>
+        <th>tag num</th>
+        <th>wait time</th>
+        <th>pass time</th>
+        <th>date</th>
+        <th>time</th>
+        <th>park_id</th>
+    </tr>
+    {% for data in data_list %}
+    <tr>
+        <td>{{data.id}}</td>
+        <td>{{data.name_id}}</td>
+        <td>{{data.tag_id}}</td>
+        <td>{{data.wait_time}}</td>
+        <td>{{data.pass_time}}</td>
+        <td>{{data.date}}</td>
+        <td>{{data.time}}</td>
+        <td>{{data.park}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

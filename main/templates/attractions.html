@@ -1,0 +1,30 @@
+{% extends 'admin.html' %}
+
+{% block title %}
+<title>attractions</title>
+{% endblock %}
+
+{% block content %}
+<h1>attractions list</h1>
+<table class="table table-sm table-striped table-bordered border-1 text-secondary table-light">
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>alias</th>
+        <th>park_id</th>
+    </tr>
+    {% for attraction in attractions %}
+        <tr>
+            <td>{{attraction.id}}</td>
+            <td>{{attraction.name}}</td>
+            <td>
+                <form action="attractions/alias/{{attraction.id}}" method="POST">
+                    <input type="text" name="alias" value="{{attraction.alias}}">
+                    <input type="submit" value="Change">
+                </form>
+            </td>
+            <td>{{attraction.park}}</td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>{{park}} - {{date_time.date()}}の待ち時間</title>
+{% endblock %}
+
+{% block header %}
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Disney Wait Time</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tdl/today">今日のディズニーランド</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tds/today">今日のディズニーシー</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tdl/yesterday">昨日のディズニーランド</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/tds/yesterday">昨日のディズニーシー</a>
+                    </li>
+                </ul>
+                <a class="navbar-text me-2">過去の待ち時間</a>
+                <form class="d-flex" action="/search" method="POST">
+                    <div class="form-check form-check-inline navbar-text">
+                        {% if park == '東京ディズニーランド' %}
+                        <input class="form-check-input" type="radio" name="park" id="inlineRadio1" checked='checked' value="tdl">
+                        {% else %}
+                        <input class="form-check-input" type="radio" name="park" id="inlineRadio1" value="tdl">
+                        {% endif %}
+                        <label class="form-check-label" for="inlineRadio1">TDL</label>
+                    </div>
+                    <div class="form-check form-check-inline navbar-text">
+                        {% if park == '東京ディズニーシー' %}
+                        <input class="form-check-input" type="radio" name="park" id="inlineRadio2" checked='checked' value="tds">
+                        {% else %}
+                        <input class="form-check-input" type="radio" name="park" id="inlineRadio2" value="tds">
+                        {% endif %}
+                        <label class="form-check-label" for="inlineRadio2">TDS</label>
+                    </div>
+                    <input class="form-control form-control-sm me-2" type="date" name="date" required value="{{date_time.strftime('%Y-%m-%d')}}">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+
+{% block content %}
+<div class="time container mt-5">
+    <ul class="nav nav-pills nav-justified">
+        {% if park == '東京ディズニーランド' %}
+        <li class="nav-item">
+            <a class="nav-link btn btn-primary" href="/tdl/{{date_time.strftime('%Y-%m-%d')}}">東京ディズニーランド</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-secondary" href="/tds/{{date_time.strftime('%Y-%m-%d')}}">東京ディズニーシー</a>
+        </li>
+        {% elif park == '東京ディズニーシー' %}
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-secondary" href="/tdl/{{date_time.strftime('%Y-%m-%d')}}">東京ディズニーランド</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link btn btn-primary" href="/tds/{{date_time.strftime('%Y-%m-%d')}}">東京ディズニーシー</a>
+        </li>
+        {% endif %}
+    </ul>
+    <h3>{{park}} {{date_time.date()}}の待ち時間</h3>
+    {{tables[0] | safe}}
+    {{tables[1] | safe}}
+    <h3 class="mt-4">ファストパス・スタンバイパス発券状況</h3>
+    {{tables[2] | safe}}
+</div>
+
+<div class="info container mt-5">
+    <div class="opening-time card border-primary mb-3">
+        <div class="card-header">営業時間</div>
+        <div class="card-body">
+            <h4 class="card-title">
+                {% for time in opening_time %}
+                {{time.open_time.strftime('%H:%M')}} - {{time.close_time.strftime('%H:%M')}}
+                {% endfor %}
+            </h4>
+        </div>
+    </div>
+    <div class="show card border-info mb-3">
+        <div class="card-header">ショー・パレード</div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for show in shows %}
+                <li class="list-group-item">
+                    <h4>{{show[0]}}</h4>
+                    <h5>{{show[1]}}</h5>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="close card border-warning mb-3">
+        <div class="card-header">休止アトラクション</div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for close in closes %}
+                <li class="list-group-item"><h4>{{close}}</h4></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
