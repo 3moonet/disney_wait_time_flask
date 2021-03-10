@@ -9,8 +9,11 @@
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Disney Wait Time</a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0" style="font-size: small;">
                     <li class="nav-item">
                         <a class="nav-link" href="/tdl/today">今日のディズニーランド</a>
                     </li>
@@ -24,8 +27,8 @@
                         <a class="nav-link" href="/tds/yesterday">昨日のディズニーシー</a>
                     </li>
                 </ul>
-                <a class="navbar-text me-2">過去の待ち時間</a>
-                <form class="d-flex" action="/search" method="POST">
+                <span class="navbar-text mr-sm-2">過去の待ち時間</span>
+                <form class="form-inline" action="/search" method="POST">
                     <div class="form-check form-check-inline navbar-text">
                         {% if park == '東京ディズニーランド' %}
                         <input class="form-check-input" type="radio" name="park" id="inlineRadio1" checked='checked' value="tdl">
@@ -42,7 +45,7 @@
                         {% endif %}
                         <label class="form-check-label" for="inlineRadio2">TDS</label>
                     </div>
-                    <input class="form-control form-control-sm me-2" type="date" name="date" required value="{{date_time.strftime('%Y-%m-%d')}}">
+                    <input class="form-control mr-sm-2" type="date" name="date" required value="{{date_time.strftime('%Y-%m-%d')}}">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
