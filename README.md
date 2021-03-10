@@ -5,4 +5,4 @@
 パーク、日にちを選択して表示できます。  
 現在開発途中...  
 ___
-[https://disney-wait-time-3moon.herokuapp.com/](URL)
+[heroku公開URL](https://disney-wait-time-3moon.herokuapp.com/)
