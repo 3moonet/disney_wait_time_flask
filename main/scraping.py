@@ -16,6 +16,7 @@ options.add_argument('--disable-extensions')
 options.add_argument('--proxy-server="direct://"')
 options.add_argument('--proxy-bypass-list=*')
 options.add_argument('--start-maximized')
+options.add_argument('--window-size=1920,1080')
 options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36"')
 
 # park = "tdl" or "tds" must be str-type
