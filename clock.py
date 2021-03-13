@@ -8,3 +8,5 @@ if __name__ == '__main__':
     p2.daemon = True
     p1.start()
     p2.start()
+    p1.join()
+    p2.join()
