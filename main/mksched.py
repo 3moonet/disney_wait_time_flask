@@ -46,6 +46,3 @@ def execute_schedule(park):
                 sleep(900)
             else:
                 break
-
-if __name__ == '__main__':
-    pass
