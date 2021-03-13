@@ -115,12 +115,9 @@ def get_opening_time(park):
     driver.get(url)
     element = WebDriverWait(driver, 20).until(EC.visibility_of_all_elements_located) # wait all elements
 
-    try:
-        opening_time = driver.find_element_by_class_name('time').text
-        driver.quit()
-        return opening_time
-    except:
-        print(driver.page_source)
+    opening_time = driver.find_element_by_class_name('time').text
+    driver.quit()
+    return opening_time
 
 
 def get_close_list_day(park):
