@@ -6,7 +6,8 @@ from selenium.webdriver.chrome.options import Options
 import datetime
 from time import sleep
 
-driver_path = '.\main\chromedriver.exe'
+# driver_path = '.\main\chromedriver.exe' in local
+driver_path = '/app/.chromedriver/bin/chromedriver'
 
 options = Options()
 options.add_argument('--headless')
