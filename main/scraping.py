@@ -120,7 +120,7 @@ def get_opening_time(park):
         driver.quit()
         return opening_time
     except:
-        print(driver.page_source())
+        print(driver.page_source)
 
 
 def get_close_list_day(park):
